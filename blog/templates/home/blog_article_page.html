@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+<div class="container">
+    <H1 class="text-center">{{self.title}}</H1>
+    <div class="row align-items-center">
+        <div class="col text-center">
+            {% image self.blog_image fill-1920x1280 as tmp_photo %}
+            <img src="{{ tmp_photo.url }}" width="220" height="146" alt="{{ tmp_photo.alt }}" />
+        </div>
+    </div>
+    <p>Date is {{self.date}}</p>
+    <blockquote class="blockquote">
+        <p>{{self.intro}}</p>
+    </blockquote>
+    <p>{{self.body|richtext}}</p>
+    <div class=" bg-warning p-3 d-grid gap-3">
+        {% for block in page.content %}
+        {% include_block block %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

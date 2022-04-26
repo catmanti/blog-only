@@ -26,6 +26,7 @@ class BlogArticlePage(Page):
     content = StreamField([
         ('title_and_text',blocks.TitleAndTextBlock()),
         ('full_richtext',blocks.RichTextBlock()),
+        ("cards",blocks.CardBlock()),
         ],null=True,blank=True)
 
     blog_image = models.ForeignKey("wagtailimages.Image",blank=False,null=True, related_name="+", on_delete=models.SET_NULL,)

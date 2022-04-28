@@ -10,6 +10,17 @@
         </div>
     </div>
     <p>Date is {{self.date}}</p>
+            {% for iter in self.blog_authors.all %}
+    <span>Written by:</span>
+            <span class="fst-italic">
+                {% comment %} to add comma only to first authors and add fullstop to the last {% endcomment %}
+                {% if forloop.last %}
+                {{ iter.author.name }}.
+                {% else %}
+                {{ iter.author.name }},
+                {% endif %}</span>
+            {% endfor %}
+    <p class="lh-1">&nbsp</p>
     <blockquote class="blockquote">
         <p>{{self.intro}}</p>
     </blockquote>

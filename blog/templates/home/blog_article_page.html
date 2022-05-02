@@ -11,7 +11,7 @@
     </div>
     <p>Date is {{self.date}}</p>
             {% for iter in self.blog_authors.all %}
-    <span>Written by:</span>
+            {% if forloop.first %}<span>Written by:</span> {% endif %}
             <span class="fst-italic">
                 {% comment %} to add comma only to first authors and add fullstop to the last {% endcomment %}
                 {% if forloop.last %}

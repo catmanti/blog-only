@@ -1,0 +1,6 @@
+{% load wagtailcore_tags static %}
+<nav>
+        {% for page in pages %}
+           <a href="{% pageurl page %}">{{page.title}}</a> <span>&nbsp</span>
+        {% endfor %}
+</nav>

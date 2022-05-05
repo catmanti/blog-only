@@ -2,18 +2,18 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
-<h1>Blog Index Page</h1>
-<p>Title is {{page.title}}</p>
+<p>Blog Index Page</p>
+<h1>Title is {{page.title}}</h1>
 <p>The owner is {{page.owner}}</p>
 
 {% for post in page.get_children %}
 {% image post.specific.blog_image fill-1920x1280 as tmp_photo %}
 <div class='container'>
-    <div class='row'>
-        <div class='col-sm-4 col-lg-2'>
-            <img src="{{ tmp_photo.url }}" width="220" height="146" alt="{{ tmp_photo.alt }}" />
+    <div class='row '>
+        <div class='col-md-auto'>
+            <img class="p-2" src="{{ tmp_photo.url }}" width="220" height="146" alt="{{ tmp_photo.alt }}" />
         </div>
-        <div class='col-sm-8 col-lg-10'>
+        <div class='col'>
             <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
             {{ post.specific.intro|truncatewords:10 }}
             {{ post.specific.body|richtext|truncatewords:20 }}

@@ -15,9 +15,21 @@ class HomePage(Page):
     is_creatable = False
 
 class BlogIndexPage(Page):
-    """Blog Listings Page"""
+    """For pages like About page Directors massage"""
     parent_page_types = ['HomePage']
     subpage_types = ['BlogArticlePage']
+    content = StreamField([
+        ('title_and_text',blocks.TitleAndTextBlock()),
+        ('full_richtext',blocks.RichTextBlock()),
+        ("message",blocks.MessageBlock()),
+        ],null=True,blank=True)
+    # blog_image = models.ForeignKey("wagtailimages.Image",blank=True,null=True, related_name="+", on_delete=models.SET_NULL,)
+        
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('content'),
+        # ImageChooserPanel("blog_image"),
+    ]
+
 
 class BlogAuthorsOrderable(Orderable):
     """

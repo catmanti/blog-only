@@ -1,6 +1,42 @@
 {% load wagtailcore_tags static %}
-<nav>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Home</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
         {% for page in pages %}
-           <a href="{% pageurl page %}">{{page.title}}</a> <span>&nbsp</span>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% pageurl page %}" >{{ page.title }}</a>
+              </li>
+              {% if page.get_children %}
+                {% for child in page.get_children.live.in_menu %}
+              <li class="nav-item dropdown">
+                {% if child.get_children %}
+                <a class="nav-link dropdown-toggle" href="{% pageurl child %}" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ child.title }}</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="{% pageurl child %}">{{ child.title }}</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  {% for subchild in child.get_children.live.in_menu %}
+                  <li><a class="dropdown-item" href="{% pageurl subchild %}">{{ subchild.title }}</a></li>
+
+                  {% endfor %} 
+                </ul>
+                {% else %}
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% pageurl child %}" >{{ child.title }}</a>
+              </li>
+                {% endif %}
+
+                {% endfor %} 
+              {% endif %}
         {% endfor %}
-</nav>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      

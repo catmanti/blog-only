@@ -24,9 +24,10 @@
         {% endblock %}
     </head>
 
+{% wagtailuserbar %}
     <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
-        {% include "menus/main_menu.html" %}
+        {% comment %} {% include "menus/main_menu.html" %} {% endcomment %}
+{% get_navbar %}
         {% block content %}{% endblock %}
 
         {# Global javascript #}

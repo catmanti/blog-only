@@ -1,0 +1,8 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+        {% image self.image fill-512x640 as photo %}
+        <div class="text-center">
+            <img src="{{ photo.url }}" width="256" height="320" alt="{{ tmp_photo.alt }}" />
+            <p class="text-secondary"> {{ self.title }} </p>
+        </div>
+            <p class="px-3 text-secondary bg-white text-justify"> {{ self.message }}</p>

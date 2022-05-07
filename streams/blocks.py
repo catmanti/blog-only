@@ -38,3 +38,15 @@ class CardBlock(blocks.StructBlock):
         label='staff cards'
         # need explicit template path
         template = "streams/card_block.html"
+
+class MessageBlock(blocks.StructBlock):
+    """Image Title and a Message for Directors"""
+    title = blocks.CharBlock(required=True,help_text="add your title")
+    message = blocks.CharBlock(required=True)
+    image = ImageChooserBlock(required=True)
+    class Meta:
+            icon='placeholder'
+            label='Director Message'
+            # need explicit template path
+            template = "streams/message_block.html"
+

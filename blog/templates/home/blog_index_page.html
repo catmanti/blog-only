@@ -6,19 +6,35 @@
 <h1>Title is {{page.title}}</h1>
 <p>The owner is {{page.owner}}</p>
 
-{% for post in page.get_children %}
-{% image post.specific.blog_image fill-1920x1280 as tmp_photo %}
-<div class='container'>
-    <div class='row '>
-        <div class='col-md-auto'>
-            <img class="p-2" src="{{ tmp_photo.url }}" width="220" height="146" alt="{{ tmp_photo.alt }}" />
-        </div>
-        <div class='col'>
-            <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-            {{ post.specific.intro|truncatewords:10 }}
-            {{ post.specific.body|richtext|truncatewords:20 }}
+    {% for post in page.get_children %}
+    {% image post.specific.blog_image fill-1920x1280 as tmp_photo %}
+    <div class='container'>
+        <div class='row '>
+            <div class='col-md-auto'>
+                <img class="p-2" src="{{ tmp_photo.url }}" width="220" height="146" alt="{{ tmp_photo.alt }}" />
+            </div>
+            <div class='col'>
+                <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
+                {{ post.specific.intro|truncatewords:10 }}
+                {{ post.specific.body|richtext|truncatewords:20 }}
+            </div>
         </div>
     </div>
-</div>
-{% endfor %}
+    {% endfor %}
+
+    {% if page.content %}
+                
+        <div class="row justify-content-center">
+        {% for block in page.content %}
+        {% if forloop.first %}
+        <div class="col-sm-12 p-2 bg-muted">
+        {% else %}
+        <div class="col-sm-6 col-lg-4  p-2 bg-muted">
+        {% endif %}
+                {% include_block block %}
+        </div>
+        {% endfor %}
+        </div>
+        
+    {% endif %}
 {% endblock content %}

@@ -1,8 +1,11 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
+                <div class="card ">
         {% image self.image fill-512x640 as photo %}
-        <div class="text-center">
-            <img src="{{ photo.url }}" width="256" height="320" alt="{{ tmp_photo.alt }}" />
-            <p class="text-secondary"> {{ self.title }} </p>
-        </div>
-            <p class="px-3 text-secondary bg-white text-justify"> {{ self.message }}</p>
+                  <img src="{{ photo.url }}" style="width:256px; height: 320px; display:block; margin-left:auto; margin-right:auto;" class="card-img-top" alt="{{ photo.alt }}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ self.title }}</h5>
+                    <p class="card-text">{{ self.message }}</p>
+                  </div>
+                </div>
+                

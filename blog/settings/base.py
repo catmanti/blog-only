@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     'search',
     'streams',
 
+    'wagtail.contrib.modeladmin',  # Don't repeat if it's there already
+    'wagtailmenus',
+
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.embeds',
@@ -78,6 +81,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                 'wagtailmenus.context_processors.wagtailmenus',
             ],
         },
     },
@@ -170,3 +174,6 @@ WAGTAILSEARCH_BACKENDS = {
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://example.com'
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
+# For menus
+# WAGTAILMENUS_ACTIVE_CLASS = "active"
+WAGTAILMENUS_ACTIVE_ANCESTOR_CLASS = "active"

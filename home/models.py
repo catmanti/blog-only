@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from streams import blocks
 from modelcluster.fields import ParentalKey
 from wagtail.core.models import Page, Orderable
@@ -18,6 +19,28 @@ class BlogIndexPage(Page):
     """Blog Listings Page"""
     parent_page_types = ['HomePage']
     subpage_types = ['BlogArticlePage']
+    def get_context(self, request, *args, **kwargs):
+        """Adding custom stuff to our context."""
+        context = super().get_context(request, *args, **kwargs)
+        this_page = context["page"]
+
+        paginator = Paginator(this_page.get_children(), 4)
+        # Try to get the ?page=x value
+        page = request.GET.get("page")
+        try:
+            # If the page exists and the ?page=x is an int
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            # If the ?page=x is not an int; show the first page
+            posts = paginator.page(1)
+        except EmptyPage:
+            # If the ?page=x is out of range (too high most likely)
+            # Then return the last page
+            posts = paginator.page(paginator.num_pages)
+
+        context["posts"] = posts
+        # this is not "page" or "self"
+        return context
 
 class BlogAuthorsOrderable(Orderable):
     """

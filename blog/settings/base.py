@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'home',
     'search',
     'streams',
+    'dj',
 
     'wagtail.contrib.modeladmin',  # Don't repeat if it's there already
     'wagtailmenus',
@@ -99,6 +100,17 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# DATABASES = {
+#       'default': {
+#           'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#           'NAME': 'blog_only',
+#           'USER': 'blog_only_user',
+#           'PASSWORD': 'Catman5843',
+#           'HOST': 'localhost',
+#           'PORT': '',
+#       }
+#   }
 
 
 # Password validation

@@ -12,6 +12,7 @@ urlpatterns = [
     path('django-admin/', admin.site.urls),
 
     path('admin/', include(wagtailadmin_urls)),
+    path('thk/dj/', include("dj.urls")),
     path('documents/', include(wagtaildocs_urls)),
 
     path('search/', search_views.search, name='search'),
@@ -29,7 +30,8 @@ if settings.DEBUG:
     urlpatterns += [
         path('__debug__/', include('debug_toolbar.urls')),
     ]
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
 
 urlpatterns = urlpatterns + [
     # For anything not caught by a more specific rule above, hand over to

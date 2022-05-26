@@ -13,7 +13,12 @@ from wagtail.search import index
 
 
 class HomePage(Page):
-    is_creatable = False
+    # is_creatable = True
+    body = models.CharField(max_length=200)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body', classname="full"),
+    ]
 
 class BlogIndexPage(Page):
     """Blog Listings Page"""
@@ -81,7 +86,7 @@ register_snippet(BlogAuthor)
 
 class BlogArticlePage(Page):
     """Blog Articles"""
-    parent_page_types = ['BlogIndexPage']
+    parent_page_types = ['HomePage','BlogIndexPage']
     subpage_types = []
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
